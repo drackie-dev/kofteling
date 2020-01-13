@@ -6,7 +6,7 @@ import jwt
 import datetime
 from functools import wraps
 
-from .models import db, User
+from models import db, User
 
 def token_required(f):
     @wraps(f)

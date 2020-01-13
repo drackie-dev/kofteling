@@ -1,10 +1,9 @@
-class Config:
+class Config():
+    pass
 
-    # General
+class DebugConfig(Config):
     TESTING = True
     FLASK_DEBUG = True
-    SECRET_KEY = 'very-secret'
-
-    # Database
+    SECRET_KEY = 'geheim'
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
