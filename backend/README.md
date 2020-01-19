@@ -11,3 +11,4 @@ pip3 install -r requirements.txt
 ```
 python3 app.py
 ```
+Backend is niet getest, en nog niet aangesloten op frontend...
