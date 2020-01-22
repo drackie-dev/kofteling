@@ -6,7 +6,7 @@ import jwt
 import datetime
 from functools import wraps
 
-from models import db, User
+from models import db, Users
 
 def token_required(f):
     @wraps(f)
@@ -36,7 +36,7 @@ def get_all_users(current_user):
     if not current_user.admin:
         return jsonify({'message' : 'Cannot perform that function!'})
 
-    users = User.query.all()
+    users = Users.query.all()
 
     output = []
 
@@ -57,7 +57,7 @@ def get_one_user(current_user, public_id):
     if not current_user.admin:
         return jsonify({'message' : 'Cannot perform that function!'})
 
-    user = User.query.filter_by(public_id=public_id).first()
+    user = Users.query.filter_by(public_id=public_id).first()
 
     if not user:
         return jsonify({'message' : 'No user found!'})
@@ -77,7 +77,7 @@ def create_user():
 
     hashed_password = generate_password_hash(data['password'], method='sha256')
 
-    new_user = User(public_id=str(uuid.uuid4()), name=data['name'], password=hashed_password, admin=False)
+    new_user = Users(public_id=str(uuid.uuid4()), name=data['name'], password=hashed_password, admin=False)
     db.session.add(new_user)
     db.session.commit()
 
@@ -89,7 +89,7 @@ def promote_user(current_user, public_id):
     if not current_user.admin:
         return jsonify({'message' : 'Cannot perform that function!'})
 
-    user = User.query.filter_by(public_id=public_id).first()
+    user = Users.query.filter_by(public_id=public_id).first()
 
     if not user:
         return jsonify({'message' : 'No user found!'})
@@ -105,7 +105,7 @@ def delete_user(current_user, public_id):
     if not current_user.admin:
         return jsonify({'message' : 'Cannot perform that function!'})
 
-    user = User.query.filter_by(public_id=public_id).first()
+    user = Users.query.filter_by(public_id=public_id).first()
 
     if not user:
         return jsonify({'message' : 'No user found!'})
@@ -122,7 +122,7 @@ def login():
     if not auth or not auth.username or not auth.password:
         return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
 
-    user = User.query.filter_by(name=auth.username).first()
+    user = Users.query.filter_by(name=auth.username).first()
 
     if not user:
         return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})

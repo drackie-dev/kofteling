@@ -9,7 +9,6 @@ db.init_app(app)
     
 with app.app_context():
     import routes
-    engine = db.create_engine('mssql+ppyodbc://kofteling:kofteling@SQL_SERVER', {})
     db.create_all()
 
 if __name__ == "__main__":
