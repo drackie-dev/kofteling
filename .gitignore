@@ -3,3 +3,4 @@ node_modules
 kofteling.code-workspace
 .vscode
 .idea
+.DS_STORE
