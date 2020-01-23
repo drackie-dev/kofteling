@@ -1,6 +1,7 @@
 import pyodbc
+import urllib.parse as p
 
-server = 'DESKTOP-N0GN0AT'
+server = 'localhost'
 database = 'KOFTELING'
 username = 'kofteling'
 password = 'kofteling'
