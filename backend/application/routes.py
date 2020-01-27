@@ -77,7 +77,7 @@ def get_one_user(current_user, public_id):
 @app.route('/user', methods=['POST'])
 def create_user():
 
-    data = request.get_json()
+    data = request.get_json(force=True)
 
     hashed_password = generate_password_hash(data['password'], method='sha256')
 

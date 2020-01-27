@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { Card, Logo, Form, Input, Button } from '../components/AuthForm';
-import { register } from '../components/UserFunctions'
+import { register } from '../components/UserFunctions.js'
+import axios from 'axios'
 
-class Register extends Component {
+
+class SignUp extends Component {
   constructor() {
     super()
     this.state = {
@@ -22,14 +24,13 @@ class Register extends Component {
   onSubmit(e) {
     e.preventDefault()
 
-    console.log('Submitted!')
-
     const newUser = {
       name: this.state.name,
       password: this.state.password
     }
 
-    register(newUser).then(res => {
+    register(newUser)
+    .then(res => {
       this.props.history.push('/Login')
     })
   }
@@ -77,6 +78,8 @@ class Register extends Component {
   }
 }
 
+export default SignUp;
+
 // function Signup() {
 //   return (
 //     <Card>
@@ -90,5 +93,3 @@ class Register extends Component {
 //     </Card>
 //   );
 // }
-
-export default Register;
